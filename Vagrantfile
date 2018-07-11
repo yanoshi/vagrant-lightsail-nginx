@@ -32,8 +32,9 @@ Vagrant.configure(2) do |config|
           { from_port: 443, to_port: 443, protocol: 'tcp' }
         ]
 
+        override.nfs.functional = false
+        override.vm.allowed_synced_folder_types = :rsync
         override.vm.synced_folder "./html", "/var/www/html", type: "rsync"
-
 
         if ARGV[0] == "up" || ARGV[0] == "provision" then
           config.vm.provision :shell do |shell|
